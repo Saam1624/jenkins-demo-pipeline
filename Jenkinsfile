@@ -1,6 +1,10 @@
 pipeline {
 
-    agent any
+    agent {
+        docker {
+            image 'python:3.12'
+        }
+    }
 
     stages {
 
@@ -9,11 +13,14 @@ pipeline {
                 sh 'pip install -r requirements.txt'
             }
         }
+
+
         stage('Run Test') {
             steps {
                 sh 'pytest'
             }
         }
+
 
         stage('Build Completed') {
             steps {
