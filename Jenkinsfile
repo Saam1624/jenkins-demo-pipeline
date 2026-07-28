@@ -6,11 +6,6 @@ pipeline {
         }
     }
 
-    environment {
-        HOME = "/tmp"
-        PATH = "/tmp/.local/bin:$PATH"
-    }
-
     stages {
 
         stage('Install Dependencies') {
@@ -19,13 +14,11 @@ pipeline {
             }
         }
 
-
         stage('Run Test') {
             steps {
-                sh 'pytest'
+                sh 'python -m pytest'
             }
         }
-
 
         stage('Build Completed') {
             steps {
