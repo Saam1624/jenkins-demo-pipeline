@@ -1,19 +1,21 @@
 pipeline {
 
-    agent any
+    agent {
+        docker {
+            image 'python:3.12'
+        }
+    }
+
+    environment {
+        HOME = "/tmp"
+        PATH = "/tmp/.local/bin:$PATH"
+    }
 
     stages {
 
-        stage('Clone Code') {
-            steps {
-                git 'https://github.com/Saam164/jenkins-demo-pipeline.git'
-            }
-        }
-
-
         stage('Install Dependencies') {
             steps {
-                sh 'pip install -r requirements.txt'
+                sh 'pip install --user -r requirements.txt'
             }
         }
 
