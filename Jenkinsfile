@@ -6,6 +6,11 @@ pipeline {
         }
     }
 
+    environment {
+        HOME = "/tmp"
+        PATH = "/tmp/.local/bin:${env.PATH}"
+    }
+
     stages {
 
         stage('Install Dependencies') {
@@ -16,7 +21,7 @@ pipeline {
 
         stage('Run Test') {
             steps {
-                sh 'python -m pytest'
+                sh 'pytest'
             }
         }
 
